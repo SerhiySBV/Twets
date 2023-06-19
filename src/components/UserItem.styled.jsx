@@ -43,6 +43,15 @@ export const Footnotes = styled.img`
   max-width: -webkit-fill-available;
 `;
 export const Avatar = styled.img`
+  border-radius: 50%;
+  border: #ebd8ff solid 8px;
+  max-height: 80px;
+  max-width: 80px;
+  object-fit: contain;
+  box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
+    inset 0px -2.19582px 4.39163px #ae7be3,
+    inset 0px 4.39163px 3.29372px #fbf8ff;
+
   position: absolute;
   top: -40px;
   left: 50%;
@@ -74,7 +83,7 @@ export const Followers = styled(TweetsCount)`
 export const Button = styled.button`
   width: 196px;
   height: 50px;
-  background: #ebd8ff;
+  background: ${(props)=>props.background};
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: 10.3108px;
 `;

@@ -1,12 +1,10 @@
-import React from "react";
-import TweetItem from "./components/TweetItem";
-
+import UserList from "./components/UsersList";
 function App() {
   return (
     <div>
-<TweetItem/>
+      <UserList />
     </div>
-  )
+  );
 }
 
 export default App;
