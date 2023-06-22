@@ -1,4 +1,6 @@
-import {  useState } from "react";
+import { useState } from "react";
+import picture from "../images/picture.png";
+import logo from "../images/Logo.png";
 import {
   Avatar,
   AvatarBox,
@@ -12,52 +14,48 @@ import {
   Wrapper,
 } from "./UserItem.styled";
 
-import axios from "axios";
+import { updateUser } from "../api/usersApi";
 
-const UserItem = (user) => {
-  const { avatar, followers, tweets, following, id } = user.user;
+const UserItem = ({ user }) => {
+  const { avatar, followers, tweets, following, id } = user;
+
   const [followingStatus, setFollowingStatus] = useState(following);
   const [followersValue, setFollowersValue] = useState(followers);
 
   const handleClick = () => {
-    setFollowingStatus(followingStatus ? false : true);
-    !followingStatus
-      ? setFollowersValue(followersValue + 1)
-      : setFollowersValue(followersValue -1);
-    
-    const data = {
-      followers: followersValue,
-      following: followingStatus,
-    };
+    const updatedFollowingStatus = !followingStatus;
+    setFollowingStatus(updatedFollowingStatus);
+    setFollowersValue((prevState) =>
+      updatedFollowingStatus ? prevState + 1 : prevState - 1
+    );
 
-    axios
-      .put(
-        `https://648f329a75a96b664444d30b.mockapi.io/users/users/${id}`,
-        data
-      )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    const data = {
+      followers: updatedFollowingStatus
+        ? followersValue + 1
+        : followersValue - 1,
+      following: updatedFollowingStatus,
+    };
+    updateUser(data, id);
   };
- 
+
   const formattedCount = new Intl.NumberFormat("en-US").format(followersValue);
 
   return (
     <Wrapper>
-      <Logo src={"../images/Logo.png"} alt="Logo" />
-      <Footnotes src="../images/picture.png" alt="Footnotes" />
-      <AvatarBox>
+      <Logo src={logo} alt="Logo" />
+      <Footnotes src={picture} alt="Footnotes" />
+               <AvatarBox>
         <HorizontalLine />
         <Avatar src={avatar} alt="Avatar" />
       </AvatarBox>
-
       <InfoBox>
         <TweetsCount>{tweets} tweets</TweetsCount>
         <Followers>{formattedCount} FOLLOWERS</Followers>
         <Button
           type="button"
           background={followingStatus ? "#5CD3A8" : "#ebd8ff"}
-          onClick={handleClick}
-        >
+          onClick={() => handleClick()}
+        >          
           {followingStatus ? "FOLLOWING" : "FOLLOW"}
         </Button>
       </InfoBox>

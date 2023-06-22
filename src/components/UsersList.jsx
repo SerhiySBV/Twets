@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UserItem from "./UserItem";
 
-import { getAllUsers } from "../api/users";
+import { getAllUsers } from "../api/usersApi";
 import { UserListStyle } from "./UserList.styled";
 
 const UserList = () => {

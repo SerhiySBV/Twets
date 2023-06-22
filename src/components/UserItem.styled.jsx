@@ -40,7 +40,7 @@ export const HorizontalLine = styled.div`
 
 export const Footnotes = styled.img`
   padding-bottom: 18px;
-  max-width: -webkit-fill-available;
+  height: 168px;
 `;
 export const Avatar = styled.img`
   border-radius: 50%;
